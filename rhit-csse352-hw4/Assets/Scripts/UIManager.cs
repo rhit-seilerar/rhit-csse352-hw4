@@ -6,7 +6,6 @@ public class UIManager : MonoBehaviour
 {
     void Start()
     {
-        Debug.Log("Publishing Start");
         UIEventBus.Instance.Publish(UIEventBus.Type.Start);
     }
 

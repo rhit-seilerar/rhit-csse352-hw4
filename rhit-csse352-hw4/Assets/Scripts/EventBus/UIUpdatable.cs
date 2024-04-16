@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class UIUpdatable : MonoBehaviour
 {
-    protected void SubscribeToUpdates()
+    protected virtual void Start()
     {
         UIEventBus.Instance.Subscribe(UIEventBus.Type.Start, OnStart);
         UIEventBus.Instance.Subscribe(UIEventBus.Type.Update, OnUpdate);

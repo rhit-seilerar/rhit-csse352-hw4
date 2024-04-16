@@ -8,15 +8,15 @@ public class Timer : UIUpdatable
     TMP_Text text;
     float time;
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         text = GetComponent<TMP_Text>();
-        SubscribeToUpdates();
     }
 
     protected override void OnStart()
     {
-        time = 60;
+        time = 5;
         text.text = $"Time: {time:F1}s";
     }
 
