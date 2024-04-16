@@ -4,14 +4,14 @@ using UnityEngine;
 
 public abstract class UIUpdatable : MonoBehaviour
 {
-    protected void StartPausable()
+    protected void SubscribeToUpdates()
     {
         UIEventBus.Instance.Subscribe(UIEventBus.Type.Start, OnStart);
         UIEventBus.Instance.Subscribe(UIEventBus.Type.Update, OnUpdate);
         UIEventBus.Instance.Subscribe(UIEventBus.Type.Stop, OnStop);
     }
 
-    protected void StopPausable()
+    protected void UnsubscribeFromUpdates()
     {
         UIEventBus.Instance.Unsubscribe(UIEventBus.Type.Start, OnStart);
         UIEventBus.Instance.Unsubscribe(UIEventBus.Type.Update, OnUpdate);
