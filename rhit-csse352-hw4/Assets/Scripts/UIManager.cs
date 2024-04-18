@@ -6,7 +6,6 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] LoopEndHandler loopEndHandler;
     [SerializeField] TooltipManager tooltip;
-    Hoverable hovered = null;
 
     void Start()
     {
@@ -20,10 +19,6 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         UIEventBus.Instance.Publish(UIEventBus.Type.Update);
-
-        if (hovered)
-            FocusTooltip(Input.mousePosition);
-        tooltip.gameObject.SetActive(hovered);
     }
 
     void OnStart()
@@ -38,24 +33,11 @@ public class UIManager : MonoBehaviour
 
     void OnHoverStart(Hoverable hoverable)
     {
-        this.hovered = hoverable;
-        tooltip.SetInfo(hoverable.GetHoverInfo());
+        tooltip.OnHoverStart(hoverable);
     }
 
     void OnHoverStop(Hoverable hoverable)
     {
-        if (this.hovered == hoverable)
-            this.hovered = null;
-    }
-
-    void FocusTooltip(Vector2 position)
-    {
-        var tooltipRect = tooltip.gameObject.GetComponent<RectTransform>();
-        tooltipRect.anchoredPosition = new Vector2(
-            position.x - Screen.width / 2,
-            position.y - Screen.height / 2);
-        tooltipRect.pivot = new Vector2(
-            tooltipRect.anchoredPosition.x < 0 ? 0 : 1,
-            tooltipRect.anchoredPosition.y < 0 ? 0 : 1);
+        tooltip.OnHoverEnd(hoverable);
     }
 }
