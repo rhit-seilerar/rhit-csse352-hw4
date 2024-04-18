@@ -11,6 +11,8 @@ public class UIEventBus : EventBus<UIEventBus.Type>
         Stop = 2,
 
         HoverStart = 3,
-        HoverStop = 4
+        HoverStop = 4,
+
+        UpgradePurchased = 5,
     }
 }
