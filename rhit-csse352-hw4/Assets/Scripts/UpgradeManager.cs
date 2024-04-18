@@ -40,11 +40,6 @@ public class UpgradeManager : UIUpdatable
         }
     }
 
-    protected override void OnStop()
-    {
-    }
-
-    protected override void OnUpdate()
-    {
-    }
+    protected override void OnStop() { }
+    protected override void OnUpdate() { }
 }
