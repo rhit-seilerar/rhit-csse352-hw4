@@ -7,23 +7,11 @@ public class UpgradeManager : GameUpdatable
 {
     private static readonly List<UpgradeInfo> upgradeInfos = new List<UpgradeInfo>
     {
-        new UpgradeInfo(
-            1, 1,
-            "Upgrade 0",
-            "This is an upgrade!",
-            new List<GameModifier>
-            {
-            }),
+        new UpgradeInfo("Upgrade 0", "This is an upgrade!", new PurchaseInfo(1, 1), new List<GameModifier>{ }),
     };
 
     [SerializeField] GameObject upgradePrefab;
-    List<GameObject> upgrades;
-
-    protected override void Start()
-    {
-        base.Start();
-        upgrades = new List<GameObject>();
-    }
+    List<GameObject> upgrades = new List<GameObject>();
 
     protected override void OnStart()
     {
@@ -36,11 +24,7 @@ public class UpgradeManager : GameUpdatable
             upgrades.Add(upgrade);
             upgrade.name = $"Upgrade{i}";
             upgrade.transform.SetParent(transform);
-
-            var info = upgradeInfos[i];
-            var image = upgrade.GetComponent<Image>();
-            upgrade.GetComponent<UpgradeDisplay>().info = info;
-            image.sprite = Sprite.Create(Resources.Load<Texture2D>(upgrade.name), image.sprite.rect, image.sprite.pivot, image.sprite.pixelsPerUnit);
+            upgrade.GetComponent<UpgradeDisplay>().Init(upgradeInfos[i], upgrade.name);
         }
     }
 

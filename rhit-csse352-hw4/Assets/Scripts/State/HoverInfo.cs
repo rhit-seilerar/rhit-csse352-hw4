@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class HoverInfo
 {
-    string title;
-    string text;
+    readonly string title;
+    readonly string text;
 
     public HoverInfo(string title, string text)
     {

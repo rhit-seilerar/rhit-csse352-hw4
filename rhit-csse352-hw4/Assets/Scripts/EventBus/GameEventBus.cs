@@ -10,9 +10,10 @@ public class GameEventBus : EventBus<GameEventBus.Type>
         Update = 1,
         Stop = 2,
 
-        HoverStart = 3,
-        HoverStop = 4,
+        HoverStart = 3, // Hoverable
+        HoverStop = 4, // Hoverable
 
-        UpgradePurchased = 5,
+        UpgradePurchased = 5, // State.UpgradeInfo
+        BuildingPurchased = 6, // State.BuildingInfo
     }
 }

@@ -33,13 +33,11 @@ public class UIManager : MonoBehaviour
 
     void OnHoverStart(Hoverable hoverable)
     {
-        Debug.Log($"Hover start: {hoverable}");
         tooltipDisplay.OnHoverStart(hoverable);
     }
 
     void OnHoverStop(Hoverable hoverable)
     {
-        Debug.Log($"Hover stop: {hoverable}");
         tooltipDisplay.OnHoverEnd(hoverable);
     }
 }

@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-public class UpgradeInfo : HoverInfo
+public class BuildingInfo : HoverInfo
 {
     readonly PurchaseInfo purchaseInfo;
     readonly List<GameModifier> modifiers;
 
-    public UpgradeInfo(string title, string text, PurchaseInfo purchaseInfo, List<GameModifier> modifiers) : base(title, text)
+    public BuildingInfo(string title, string text, PurchaseInfo purchaseInfo, List<GameModifier> modifiers) : base(title, text)
     {
         this.purchaseInfo = purchaseInfo;
         this.modifiers = modifiers;
