@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class TooltipManager : MonoBehaviour
+public class TooltipDisplay : MonoBehaviour
 {
     [SerializeField] TMP_Text title;
     [SerializeField] TMP_Text text;

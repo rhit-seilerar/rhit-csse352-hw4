@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class MoneyDisplay : UIUpdatable
+public class MoneyDisplay : GameUpdatable
 {
     TMP_Text text;
     float money;

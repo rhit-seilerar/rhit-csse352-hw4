@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class ObsidianDisplay : UIUpdatable
+public class ObsidianDisplay : GameUpdatable
 {
     TMP_Text text;
     int obsidian;

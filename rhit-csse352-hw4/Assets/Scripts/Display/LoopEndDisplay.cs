@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LoopEndHandler : MonoBehaviour
+public class LoopEndDisplay : MonoBehaviour
 {
     [SerializeField] CanvasGroup content;
     Image image;

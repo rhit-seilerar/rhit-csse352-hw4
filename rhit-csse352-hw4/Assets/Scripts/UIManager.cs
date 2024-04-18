@@ -4,40 +4,42 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] LoopEndHandler loopEndHandler;
-    [SerializeField] TooltipManager tooltip;
+    [SerializeField] LoopEndDisplay loopEndDisplay;
+    [SerializeField] TooltipDisplay tooltipDisplay;
 
     void Start()
     {
-        UIEventBus.Instance.Publish(UIEventBus.Type.Start);
-        UIEventBus.Instance.Subscribe(UIEventBus.Type.Start, OnStart);
-        UIEventBus.Instance.Subscribe(UIEventBus.Type.Stop, OnStop);
-        UIEventBus.Instance.Subscribe<Hoverable>(UIEventBus.Type.HoverStart, OnHoverStart);
-        UIEventBus.Instance.Subscribe<Hoverable>(UIEventBus.Type.HoverStop, OnHoverStop);
+        GameEventBus.Instance.Publish(GameEventBus.Type.Start);
+        GameEventBus.Instance.Subscribe(GameEventBus.Type.Start, OnStart);
+        GameEventBus.Instance.Subscribe(GameEventBus.Type.Stop, OnStop);
+        GameEventBus.Instance.Subscribe<Hoverable>(GameEventBus.Type.HoverStart, OnHoverStart);
+        GameEventBus.Instance.Subscribe<Hoverable>(GameEventBus.Type.HoverStop, OnHoverStop);
     }
 
     void Update()
     {
-        UIEventBus.Instance.Publish(UIEventBus.Type.Update);
+        GameEventBus.Instance.Publish(GameEventBus.Type.Update);
     }
 
     void OnStart()
     {
-        loopEndHandler.gameObject.SetActive(false);
+        loopEndDisplay.gameObject.SetActive(false);
     }
 
     void OnStop()
     {
-        loopEndHandler.gameObject.SetActive(true);
+        loopEndDisplay.gameObject.SetActive(true);
     }
 
     void OnHoverStart(Hoverable hoverable)
     {
-        tooltip.OnHoverStart(hoverable);
+        Debug.Log($"Hover start: {hoverable}");
+        tooltipDisplay.OnHoverStart(hoverable);
     }
 
     void OnHoverStop(Hoverable hoverable)
     {
-        tooltip.OnHoverEnd(hoverable);
+        Debug.Log($"Hover stop: {hoverable}");
+        tooltipDisplay.OnHoverEnd(hoverable);
     }
 }

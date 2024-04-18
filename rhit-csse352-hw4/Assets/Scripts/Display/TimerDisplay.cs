@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Timer : UIUpdatable
+public class TimerDisplay : GameUpdatable
 {
     [SerializeField] float startTime = 60.0f;
     TMP_Text text;
@@ -32,7 +32,7 @@ public class Timer : UIUpdatable
         text.text = $"Time: {time:F1}s";
         text.color = Color.HSVToRGB(h * time / startTime, s, v, false);
         if (time <= 0)
-            UIEventBus.Instance.Publish(UIEventBus.Type.Stop);
+            GameEventBus.Instance.Publish(GameEventBus.Type.Stop);
     }
 
     protected override void OnStop() { }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIEventBus : EventBus<UIEventBus.Type>
+public class GameEventBus : EventBus<GameEventBus.Type>
 {
     public enum Type
     {
