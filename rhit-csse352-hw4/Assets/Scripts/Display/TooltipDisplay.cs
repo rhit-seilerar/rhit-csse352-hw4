@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class TooltipDisplay : MonoBehaviour
 {
-    [SerializeField] TMP_Text title;
     [SerializeField] TMP_Text text;
     Hoverable hovered = null;
 
@@ -18,8 +17,7 @@ public class TooltipDisplay : MonoBehaviour
     {
         hovered = hoverable;
         var info = hoverable.GetHoverInfo();
-        title.text = info.GetTitle();
-        text.text = info.GetText();
+        text.text = $"<size=32>{info.GetTitle()}</size>\n<size=20>{info.GetText()}</size>";
         gameObject.SetActive(true);
     }
 
