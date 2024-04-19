@@ -37,6 +37,7 @@ public class UIManager : MonoSingleton<UIManager>
 
     void OnStop()
     {
+        pauseScreen.gameObject.SetActive(false);
         if (GameManager.Instance.GetRunningState() != GameManager.RunningState.ENDED)
             loopEndDisplay.gameObject.SetActive(true);
     }
