@@ -28,6 +28,7 @@ public class AudioManager : MonoSingleton<AudioManager>
 
     void PlayVolcanoEruption()
     {
-        audioSource.PlayOneShot(volcanoEruption);
+        if (GameManager.Instance.GetRunningState() != GameManager.RunningState.ENDED)
+            audioSource.PlayOneShot(volcanoEruption);
     }
 }

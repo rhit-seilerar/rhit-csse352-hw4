@@ -13,9 +13,8 @@ public abstract class PurchasableManager<D, T> : MonoSingleton<PurchasableManage
 
     protected virtual void OnStart()
     {
-        foreach (var upgrade in purchasables)
-            Destroy(upgrade);
-        
+        foreach (var purchasable in purchasables)
+            Destroy(purchasable.gameObject);
         purchasables.Clear();
 
         int i = 0;
