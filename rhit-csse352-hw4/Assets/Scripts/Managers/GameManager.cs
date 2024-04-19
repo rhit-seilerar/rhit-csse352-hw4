@@ -61,11 +61,11 @@ public class GameManager : MonoSingleton<GameManager>
     {
         obsidian += GetObsidianEarned();
         money = Mathf.Min(money, modifierInfo.retainCapacity);
+        foreach (var key in purchasedBuildings.Keys)
+            key.GetPurchaseInfo().UpdateText(0);
         purchasedUpgrades.Clear();
         purchasedBuildings.Clear();
         modifierInfo = new ModifierInfo();
-        foreach (var key in purchasedBuildings.Keys)
-            key.GetPurchaseInfo().UpdateText(0);
         state = RunningState.UPDATING;
     }
 

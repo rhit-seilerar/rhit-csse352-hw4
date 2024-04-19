@@ -14,6 +14,6 @@ public class RetentionModifier : IGameModifier
 
     public override string ToString()
     {
-        return $"<color={GameManager.MONEY_COLOR}>Retain ${capacity:n1} after this loop</color>";
+        return $"<color={GameManager.MONEY_COLOR}>+${capacity:n1} Retention for Next Loop</color>";
     }
 }
