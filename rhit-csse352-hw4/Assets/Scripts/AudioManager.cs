@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : MonoSingleton<AudioManager>
 {
+    [SerializeField] AudioClip clickSound;
     AudioSource audioSource;
 
-    [SerializeField] AudioClip clickSound;
-
-    // Start is called before the first frame update
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -16,12 +14,12 @@ public class AudioManager : MonoBehaviour
         GameEventBus.Instance.Subscribe<BuildingInfo>(GameEventBus.Type.BuildingPurchased, PlayClickSound);
     }
 
-    private void PlayClickSound(UpgradeInfo info)
+    void PlayClickSound(UpgradeInfo info)
     {
         audioSource.PlayOneShot(clickSound);
     }
 
-    private void PlayClickSound(BuildingInfo info)
+    void PlayClickSound(BuildingInfo info)
     {
         audioSource.PlayOneShot(clickSound);
     }

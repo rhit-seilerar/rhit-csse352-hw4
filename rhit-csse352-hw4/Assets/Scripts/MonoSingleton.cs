@@ -31,7 +31,9 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : Component
 
         instance = this as T;
         parent = gameObject;
-        DontDestroyOnLoad(parent);
+
+        if (parent.transform.parent == null)
+            DontDestroyOnLoad(parent);
     }
 
     protected static void Destroy()

@@ -1,12 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PurchasableManager<D, T> : GameUpdatable where T : ModifierPurchaseInfo where D : PurchasableDisplay<T>
+public abstract class PurchasableManager<D, T> : MonoSingleton<PurchasableManager<D, T>> where T : ModifierPurchaseInfo where D : PurchasableDisplay<T>
 {
     [SerializeField] GameObject prefab;
-    List<GameObject> purchasables = new List<GameObject>();
+    List<D> purchasables = new List<D>();
 
-    protected override void OnStart()
+    protected virtual void Start()
+    {
+        GameEventBus.Instance.Subscribe(GameEventBus.Type.Start, OnStart);
+    }
+
+    protected virtual void OnStart()
     {
         foreach (var upgrade in purchasables)
             Destroy(upgrade);
@@ -17,7 +22,7 @@ public abstract class PurchasableManager<D, T> : GameUpdatable where T : Modifie
         foreach (var info in GetInfos())
         {
             GameObject purchasable = Instantiate(prefab);
-            purchasables.Add(purchasable);
+            purchasables.Add(purchasable.GetComponent<D>());
             purchasable.name = GetName(i);
             purchasable.transform.SetParent(transform);
             purchasable.GetComponent<D>().Init(info, $"Textures/{purchasable.name}");
@@ -25,8 +30,11 @@ public abstract class PurchasableManager<D, T> : GameUpdatable where T : Modifie
         }
     }
 
-    protected override void OnStop() { }
-    protected override void OnUpdate() { }
+    public void RemovePurchasable(D purchasable)
+    {
+        purchasables.Remove(purchasable);
+        Destroy(purchasable.gameObject);
+    }
 
     protected abstract string GetName(int index);
     protected abstract ICollection<T> GetInfos();
