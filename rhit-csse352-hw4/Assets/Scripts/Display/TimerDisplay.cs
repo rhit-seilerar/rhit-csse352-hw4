@@ -23,7 +23,6 @@ public class TimerDisplay : GameUpdatable
         text.text = $"Time: {time:F1}s";
     }
 
-
     protected override void OnUpdate()
     {
         time -= Time.deltaTime;

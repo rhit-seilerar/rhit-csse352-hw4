@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class MoneyDisplay : GameUpdatable
+public class LoopsDisplay : GameUpdatable
 {
     TMP_Text text;
 
@@ -17,7 +17,7 @@ public class MoneyDisplay : GameUpdatable
 
     protected override void OnUpdate()
     {
-        text.text = $"Money: {GameManager.Instance.GetMoney():c1}";
+        text.text = $"Loops: {GameManager.Instance.GetLoops()}";
     }
 
     protected override void OnStop() { }

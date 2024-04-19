@@ -6,20 +6,18 @@ using UnityEngine;
 public class ObsidianDisplay : GameUpdatable
 {
     TMP_Text text;
-    int obsidian;
 
     protected override void Start()
     {
         base.Start();
         text = GetComponent<TMP_Text>();
-        obsidian = 0;
     }
 
     protected override void OnStart() { }
 
     protected override void OnUpdate()
     {
-        text.text = $"Obsidian: {obsidian}pc";
+        text.text = $"Obsidian: {GameManager.Instance.GetObsidian()}pc";
     }
 
     protected override void OnStop() { }

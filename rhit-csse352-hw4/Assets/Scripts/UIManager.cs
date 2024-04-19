@@ -2,31 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManager : GameUpdatable
 {
     [SerializeField] LoopEndDisplay loopEndDisplay;
     [SerializeField] TooltipDisplay tooltipDisplay;
 
-    void Start()
+    protected override void Start()
     {
-        GameEventBus.Instance.Publish(GameEventBus.Type.Start);
-        GameEventBus.Instance.Subscribe(GameEventBus.Type.Start, OnStart);
-        GameEventBus.Instance.Subscribe(GameEventBus.Type.Stop, OnStop);
+        base.Start();
         GameEventBus.Instance.Subscribe<Hoverable>(GameEventBus.Type.HoverStart, OnHoverStart);
         GameEventBus.Instance.Subscribe<Hoverable>(GameEventBus.Type.HoverStop, OnHoverStop);
     }
 
-    void Update()
-    {
-        GameEventBus.Instance.Publish(GameEventBus.Type.Update);
-    }
-
-    void OnStart()
+    protected override void OnStart()
     {
         loopEndDisplay.gameObject.SetActive(false);
     }
 
-    void OnStop()
+    protected override void OnStop()
     {
         loopEndDisplay.gameObject.SetActive(true);
     }
@@ -40,4 +33,6 @@ public class UIManager : MonoBehaviour
     {
         tooltipDisplay.OnHoverEnd(hoverable);
     }
+
+    protected override void OnUpdate() { }
 }

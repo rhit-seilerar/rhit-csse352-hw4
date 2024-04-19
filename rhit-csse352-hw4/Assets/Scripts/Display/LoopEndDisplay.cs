@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class LoopEndDisplay : MonoBehaviour
 {
     [SerializeField] CanvasGroup content;
+    [SerializeField] TMP_Text text;
     Image image;
     bool fading;
 
@@ -32,6 +33,7 @@ public class LoopEndDisplay : MonoBehaviour
         fading = true;
         while (fading && content.alpha < 1)
         {
+            text.text = $"You earned <color=#372648>{GameManager.Instance.GetObsidianEarned()}pc</color> of <color=#372648>Obsidian</color>.";
             content.alpha += Time.deltaTime * 1f;
             content.interactable = content.alpha >= 0.1;
             yield return new WaitForEndOfFrame();
