@@ -13,9 +13,9 @@ public class BuildingManager : PurchasableManager<BuildingDisplay, BuildingInfo>
         new BuildingInfo("Basaltic Sculptures",   "The number of poses is innumerable.",
                 new PurchaseInfo(80, 0, 1.1f, 0f), new List<IGameModifier>{ new IncomeModifier(2f) }, 1f),
         new BuildingInfo("Geothermal Generators", "Gotta keep the lights on somehow.",
-                new PurchaseInfo(100, 1, 1.2f, 0f), new List<IGameModifier>{ new IncomeModifier(25f) }, 1f),
+                new PurchaseInfo(100, 1, 1.1f, 0f), new List<IGameModifier>{ new IncomeModifier(20f) }, 1f),
         new BuildingInfo("Mineral Extractors",    "<i>Shiny!</i>",
-                new PurchaseInfo(500, 20, 2f, 10f), new List<IGameModifier>{ new ObsidianModifier(1f) }, 10f),
+                new PurchaseInfo(500, 20, 1.5f, 10f), new List<IGameModifier>{ new ObsidianModifier(1f) }, 10f),
     };
 
     protected override ICollection<BuildingInfo> GetInfos() => infos;

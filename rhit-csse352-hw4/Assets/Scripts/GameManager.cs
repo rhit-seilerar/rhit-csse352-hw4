@@ -50,7 +50,7 @@ public class GameManager : MonoSingleton<GameManager>
         if (state == RunningState.UPDATING)
         {
             GameEventBus.Instance.Publish(GameEventBus.Type.Update);
-            obsidian += Time.deltaTime * modifierInfo.obsidianRate * modifierInfo.obsidianMultiplier;
+            obsidian += Time.deltaTime * modifierInfo.obsidianRate * modifierInfo.obsidianMultiplier * modifierInfo.extractionMultiplier;
             money += Time.deltaTime * modifierInfo.passiveIncome * modifierInfo.productionMultiplier;
         }
     }
@@ -75,8 +75,10 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if (state != RunningState.ENDED)
             state = RunningState.STOPPED;
-        foreach (var bpair in purchasedBuildings)
+        foreach (var bpair in purchasedBuildings) {
             obsidianEarned += (int) Mathf.Floor(bpair.Value * bpair.Key.obsidian * modifierInfo.obsidianMultiplier);
+            bpair.Key.GetPurchaseInfo().UpdateText(0);
+        }
         loops++;
     }
 
