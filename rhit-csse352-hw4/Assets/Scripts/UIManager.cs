@@ -1,16 +1,17 @@
 using UnityEngine;
 
-public class UIManager : GameUpdatable
+public class UIManager : MonoSingleton<UIManager>
 {
     [SerializeField] TooltipDisplay tooltipDisplay;
     [SerializeField] GameObject pauseScreen;
     [SerializeField] LoopEndDisplay loopEndDisplay;
     [SerializeField] GameEndDisplay gameEndDisplay;
 
-    protected override void Start()
+    protected virtual void Start()
     {
-        base.Start();
+        GameEventBus.Instance.Subscribe(GameEventBus.Type.Start, OnStart);
         GameEventBus.Instance.Subscribe<bool>(GameEventBus.Type.Pause, OnPause);
+        GameEventBus.Instance.Subscribe(GameEventBus.Type.Stop, OnStop);
         GameEventBus.Instance.Subscribe(GameEventBus.Type.End, OnEnd);
         GameEventBus.Instance.Subscribe<Hoverable>(GameEventBus.Type.HoverStart, OnHoverStart);
         GameEventBus.Instance.Subscribe<Hoverable>(GameEventBus.Type.HoverStop, OnHoverStop);
@@ -24,7 +25,7 @@ public class UIManager : GameUpdatable
             GameEventBus.Instance.Publish(GameEventBus.Type.Pause, GameManager.Instance.GetRunningState() != GameManager.RunningState.PAUSED);
     }
 
-    protected override void OnStart()
+    void OnStart()
     {
         loopEndDisplay.gameObject.SetActive(false);
     }
@@ -34,7 +35,7 @@ public class UIManager : GameUpdatable
         pauseScreen.SetActive(paused);
     }
 
-    protected override void OnStop()
+    void OnStop()
     {
         if (GameManager.Instance.GetRunningState() != GameManager.RunningState.ENDED)
             loopEndDisplay.gameObject.SetActive(true);
@@ -54,6 +55,4 @@ public class UIManager : GameUpdatable
     {
         tooltipDisplay.OnHoverEnd(hoverable);
     }
-
-    protected override void OnUpdate() { }
 }

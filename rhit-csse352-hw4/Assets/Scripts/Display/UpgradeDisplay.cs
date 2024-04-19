@@ -10,5 +10,10 @@ public class UpgradeDisplay : PurchasableDisplay<UpgradeInfo>
             && GameManager.Instance.GetObsidian() >= info.GetPurchaseInfo().GetObsidianCost();
     }
 
-    public void OnClick() => GameEventBus.Instance.Publish(GameEventBus.Type.UpgradePurchased, info);
+    public void OnClick()
+    {
+        GameEventBus.Instance.Publish(GameEventBus.Type.UpgradePurchased, info);
+        GameEventBus.Instance.Publish<Hoverable>(GameEventBus.Type.HoverStop, this);
+        UpgradeManager.Instance.RemovePurchasable(this);
+    }
 }
