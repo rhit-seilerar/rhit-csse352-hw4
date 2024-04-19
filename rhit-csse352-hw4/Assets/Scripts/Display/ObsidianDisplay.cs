@@ -14,7 +14,7 @@ public class ObsidianDisplay : GameUpdatable
 
     protected override void OnUpdate()
     {
-        text.text = $"<size=36>Obsidian: </size>{GameManager.Instance.GetObsidian()}pc";
+        text.text = $"<size=36>Obsidian: </size>{GameManager.Instance.GetObsidian():n0}pc";
     }
 
     protected override void OnStop() { }

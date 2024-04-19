@@ -28,7 +28,6 @@ public class GameManager : MonoSingleton<GameManager>
     int loops = 0;
     float money = 0;
     float obsidian = 0f;
-    int obsidianEarned = 0;
 
     void Start()
     {
@@ -62,10 +61,11 @@ public class GameManager : MonoSingleton<GameManager>
     {
         obsidian += GetObsidianEarned();
         money = Mathf.Min(money, modifierInfo.retainCapacity);
-        obsidianEarned = 0;
         purchasedUpgrades.Clear();
         purchasedBuildings.Clear();
         modifierInfo = new ModifierInfo();
+        foreach (var key in purchasedBuildings.Keys)
+            key.GetPurchaseInfo().UpdateText(0);
         state = RunningState.UPDATING;
     }
 
@@ -78,10 +78,6 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if (state != RunningState.ENDED)
             state = RunningState.STOPPED;
-        foreach (var bpair in purchasedBuildings) {
-            obsidianEarned += (int) Mathf.Floor(bpair.Value * bpair.Key.obsidian * modifierInfo.obsidianMultiplier);
-            bpair.Key.GetPurchaseInfo().UpdateText(0);
-        }
         loops++;
     }
 
@@ -113,15 +109,11 @@ public class GameManager : MonoSingleton<GameManager>
             modifier.Apply(modifierInfo);
     }
 
-    public int GetObsidianEarned()
-    {
-        return obsidianEarned;
-    }
-
+    public float GetObsidianEarned() => Mathf.Floor(modifierInfo.obsidianReward + 0.01f);
     public RunningState GetRunningState() => state;
     public int GetLoops() => loops;
     public float GetMoney() => money;
-    public int GetObsidian() => (int) Mathf.Floor(obsidian);
+    public float GetObsidian() => Mathf.Floor(obsidian);
     public bool IsPurchased(UpgradeInfo info) => purchasedUpgrades.Contains(info);
     public int GetPurchaseCount(BuildingInfo info)
     {
