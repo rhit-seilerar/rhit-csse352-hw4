@@ -9,7 +9,7 @@ public class MoneyModifier : IGameModifier
 
     public void Apply(ModifierInfo info)
     {
-        info.productionMultiplier *= multiplier;
+        info.productionMultiplier += multiplier;
     }
 
     public override string ToString()

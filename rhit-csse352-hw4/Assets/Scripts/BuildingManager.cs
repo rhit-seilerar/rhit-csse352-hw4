@@ -5,10 +5,11 @@ public class BuildingManager : PurchasableManager<BuildingDisplay, BuildingInfo>
     private static readonly ICollection<BuildingInfo> infos = new List<BuildingInfo>()
     {
         new BuildingInfo("Collectible Rocks",
-                "You found some cat-shaped pumice. Or should I say, <i>paw</i>-mice.",
-                new PurchaseInfo(1, 0, 1.01f, 0f), new List<IGameModifier>{ new IncomeModifier(0.1f) }, 0.05f),
+                "You found some cat-shaped pumice. Or should I say, <i>paw</i>-mice.\n"
+                + $"<color={GameManager.DANGER_COLOR}>Does not yield obsidian.",
+                new PurchaseInfo(1, 0, 1.01f, 0f), new List<IGameModifier>{ new IncomeModifier(0.1f) }, 0f),
         new BuildingInfo("Lava Tours",            "<i>Only 3 casualties per week!</i>",
-                new PurchaseInfo(20, 0, 1.02f, 0f), new List<IGameModifier>{ new IncomeModifier(0.5f) }, 0.1f),
+                new PurchaseInfo(15, 0, 1.05f, 0f), new List<IGameModifier>{ new IncomeModifier(0.5f) }, 0.1f),
         new BuildingInfo("Basaltic Sculptures",   "The number of poses is innumerable.",
                 new PurchaseInfo(50, 0, 1.1f, 0f), new List<IGameModifier>{ new IncomeModifier(2f) }, 1f),
         new BuildingInfo("Geothermal Generators", "Gotta keep the lights on somehow.",
