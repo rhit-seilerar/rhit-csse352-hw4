@@ -26,6 +26,7 @@ public class GameManager : MonoSingleton<GameManager>
     int loops = 0;
     float money = 0;
     float obsidian = 0f;
+    int obsidianEarned = 0;
 
     void Start()
     {
@@ -56,6 +57,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         obsidian += GetObsidianEarned();
         money = 0;
+        obsidianEarned = 0;
         purchasedUpgrades.Clear();
         purchasedBuildings.Clear();
         modifierInfo = new ModifierInfo();
@@ -66,6 +68,10 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if (state != RunningState.ENDED)
             state = RunningState.STOPPED;
+        foreach (var bpair in purchasedBuildings) {
+            Debug.Log("hihihihihi\n");
+            obsidianEarned += (int) Mathf.Floor(bpair.Value * bpair.Key.obsidian);
+        }
         loops++;
     }
 
@@ -99,7 +105,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public int GetObsidianEarned()
     {
-        return (int) (money / 1);
+        return obsidianEarned;
     }
 
     public RunningState GetRunningState() => state;
