@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class MoneyModifier : IGameModifier
 {
     readonly float multiplier;
@@ -18,6 +14,6 @@ public class MoneyModifier : IGameModifier
 
     public override string ToString()
     {
-        return $"+{multiplier * 100:n1}% Money Production";
+        return $"<color={GameManager.HAPPY_COLOR}>+{multiplier * 100:n1}% Money Production</color>";
     }
 }

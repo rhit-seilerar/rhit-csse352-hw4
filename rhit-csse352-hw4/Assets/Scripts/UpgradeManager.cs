@@ -1,35 +1,15 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 
-public class UpgradeManager : GameUpdatable
+public class UpgradeManager : PurchasableManager<UpgradeDisplay, UpgradeInfo>
 {
-    private static readonly List<UpgradeInfo> upgradeInfos = new List<UpgradeInfo>
+    private static readonly ICollection<UpgradeInfo> infos = new List<UpgradeInfo>
     {
         new UpgradeInfo("The Glass Floor",
             $"Seal the volcano with a layer of obsidian.\n<color={GameManager.DANGER_COLOR}><b>Warning: This will end the game.</b></color>",
             new PurchaseInfo(0, 0), new List<IGameModifier>{ new GameEndModifier() }),
     };
 
-    [SerializeField] GameObject upgradePrefab;
-    List<GameObject> upgrades = new List<GameObject>();
+    protected override ICollection<UpgradeInfo> GetInfos() => infos;
 
-    protected override void OnStart()
-    {
-        foreach (var upgrade in upgrades)
-            Destroy(upgrade);
-        upgrades.Clear();
-        for (int i = 0; i < upgradeInfos.Count; i++)
-        {
-            GameObject upgrade = Instantiate(upgradePrefab);
-            upgrades.Add(upgrade);
-            upgrade.name = $"Upgrade{i}";
-            upgrade.transform.SetParent(transform);
-            upgrade.GetComponent<UpgradeDisplay>().Init(upgradeInfos[i], upgrade.name);
-        }
-    }
-
-    protected override void OnStop() { }
-    protected override void OnUpdate() { }
+    protected override string GetName(int index) => $"Upgrade{index}";
 }

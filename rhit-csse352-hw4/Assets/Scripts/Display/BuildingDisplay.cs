@@ -1,24 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
 
-public class BuildingDisplay : Hoverable
+public class BuildingDisplay : PurchasableDisplay<BuildingInfo>
 {
-    [SerializeField] TMP_Text title;
-    [SerializeField] TMP_Text text;
-    [SerializeField] TMP_Text count;
-    [SerializeField] Image image;
-    BuildingInfo info;
-
-    public void Init(BuildingInfo info, string textureName)
-    {
-        this.info = info;
-        title.text = info.GetTitle();
-        image.sprite = Sprite.Create(Resources.Load<Texture2D>(textureName), image.sprite.rect, image.sprite.pivot, image.sprite.pixelsPerUnit);
-    }
-
     protected override void OnUpdate()
     {
         var purchaseCount = GameManager.Instance.GetPurchaseCount(info);
@@ -30,8 +13,4 @@ public class BuildingDisplay : Hoverable
     }
 
     public void OnClick() => GameEventBus.Instance.Publish(GameEventBus.Type.BuildingPurchased, info);
-    public override HoverInfo GetHoverInfo() => info;
-    protected override void OnStart() { }
-    protected override void OnStop() { }
-
 }

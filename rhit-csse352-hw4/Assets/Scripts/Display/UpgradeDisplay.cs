@@ -1,22 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
 
-public class UpgradeDisplay : Hoverable
+public class UpgradeDisplay : PurchasableDisplay<UpgradeInfo>
 {
-    [SerializeField] TMP_Text text;
-    [SerializeField] Image image;
-    UpgradeInfo info;
-    
-    public void Init(UpgradeInfo info, string textureName)
-    {
-        this.info = info;
-        text.text = $"{info.GetTitle()}\n<size=20>Cost: </size>{info.GetPurchaseInfo()}";
-        image.sprite = Sprite.Create(Resources.Load<Texture2D>(textureName), image.sprite.rect, image.sprite.pivot, image.sprite.pixelsPerUnit);
-    }
-
     protected override void OnUpdate()
     {
         GetComponent<Button>().interactable = !GameManager.Instance.IsPurchased(info)
@@ -25,7 +10,4 @@ public class UpgradeDisplay : Hoverable
     }
 
     public void OnClick() => GameEventBus.Instance.Publish(GameEventBus.Type.UpgradePurchased, info);
-    public override HoverInfo GetHoverInfo() => info;
-    protected override void OnStart() { }
-    protected override void OnStop() { }
 }

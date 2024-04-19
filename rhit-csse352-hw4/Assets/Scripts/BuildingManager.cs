@@ -1,10 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class BuildingManager : GameUpdatable
+public class BuildingManager : PurchasableManager<BuildingDisplay, BuildingInfo>
 {
-    private static readonly List<BuildingInfo> buildingInfos = new List<BuildingInfo>()
+    private static readonly ICollection<BuildingInfo> infos = new List<BuildingInfo>()
     {
         new BuildingInfo("Collectible Rocks",
                 "You found some cat-shaped pumice. Or should I say, <i>paw</i>-mice.",
@@ -19,24 +17,6 @@ public class BuildingManager : GameUpdatable
                 new PurchaseInfo(100, 20, 1.1f, 5f), new List<IGameModifier>{ new ObsidianModifier(1f) }),
     };
 
-    [SerializeField] GameObject buildingPrefab;
-    List<GameObject> buildings = new List<GameObject>();
-
-    protected override void OnStart()
-    {
-        foreach (var building in buildings)
-            Destroy(building);
-        buildings.Clear();
-        for (int i = 0; i < buildingInfos.Count; i++)
-        {
-            GameObject building = Instantiate(buildingPrefab);
-            buildings.Add(building);
-            building.name = $"Building{i}";
-            building.transform.SetParent(transform);
-            building.GetComponent<BuildingDisplay>().Init(buildingInfos[i], building.name);
-        }
-    }
-
-    protected override void OnStop() { }
-    protected override void OnUpdate() { }
+    protected override ICollection<BuildingInfo> GetInfos() => infos;
+    protected override string GetName(int index) => $"Building{index}";
 }
