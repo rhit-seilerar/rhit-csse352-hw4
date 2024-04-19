@@ -69,7 +69,6 @@ public class GameManager : MonoSingleton<GameManager>
         if (state != RunningState.ENDED)
             state = RunningState.STOPPED;
         foreach (var bpair in purchasedBuildings) {
-            Debug.Log("hihihihihi\n");
             obsidianEarned += (int) Mathf.Floor(bpair.Value * bpair.Key.obsidian);
         }
         loops++;
