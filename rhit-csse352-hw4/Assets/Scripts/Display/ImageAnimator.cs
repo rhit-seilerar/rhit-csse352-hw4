@@ -12,11 +12,13 @@ public class ImageAnimator : MonoBehaviour
 	Image image;
 	float frame;
 	int index;
+	bool paused = false;
 
 	void Start()
 	{
 		image = GetComponent<Image>();
 		GameEventBus.Instance.Subscribe(GameEventBus.Type.Start, OnStart);
+		GameEventBus.Instance.Subscribe<bool>(GameEventBus.Type.Pause, OnPause);
 		OnStart();
 	}
 
@@ -26,8 +28,15 @@ public class ImageAnimator : MonoBehaviour
 		frame = 0;
     }
 
+	void OnPause(bool paused)
+    {
+		this.paused = paused;
+    }
+
 	void Update()
 	{
+		if (paused) return;
+
 		var percentTime = GameManager.Instance.GetPercentTimeRemaining();
 		var secondsPerFrame = Mathf.Lerp(minSecondsPerFrame, maxSecondsPerFrame, percentTime);
 		frame += Time.deltaTime;
