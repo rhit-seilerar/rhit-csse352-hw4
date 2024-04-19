@@ -19,7 +19,8 @@ public class UpgradeDisplay : Hoverable
 
     protected override void OnUpdate()
     {
-        GetComponent<Button>().enabled = GameManager.Instance.GetMoney() >= info.GetPurchaseInfo().GetMoneyCost()
+        GetComponent<Button>().interactable = !GameManager.Instance.IsPurchased(info)
+            && GameManager.Instance.GetMoney() >= info.GetPurchaseInfo().GetMoneyCost()
             && GameManager.Instance.GetObsidian() >= info.GetPurchaseInfo().GetObsidianCost();
     }
 
