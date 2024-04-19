@@ -19,7 +19,7 @@ public class BuildingInfo : HoverInfo
         var builder = new StringBuilder();
         builder.AppendLine(base.GetText());
         builder.Append("Cost: ");
-        builder.Append(purchaseInfo.ToString());
+        builder.AppendLine(purchaseInfo.ToString());
         foreach (var modifier in modifiers)
             builder.AppendLine(modifier.ToString());
         return builder.ToString();

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class GameModifier
 {
-    GameModifier parent;
-    float value;
+    protected GameModifier parent;
+    protected float value;
 
     public GameModifier(float value) : this(null, value) { }
     public GameModifier(GameModifier parent, float value)
