@@ -13,6 +13,8 @@ public class GameManager : MonoSingleton<GameManager>
     }
 
     RunningState state = RunningState.NOT_STARTED;
+    ICollection<UpgradeInfo> purchasedUpgrades = new HashSet<UpgradeInfo>();
+    IDictionary<BuildingInfo, int> purchasedBuildings = new Dictionary<BuildingInfo, int>();
     ModifierInfo modifierInfo = new ModifierInfo();
     int loops = 0;
     float money = 0;
@@ -56,14 +58,22 @@ public class GameManager : MonoSingleton<GameManager>
 
     void OnUpgradePurchased(UpgradeInfo info)
     {
-        money -= info.GetPurchaseInfo().GetMoneyCost();
-        obsidian -= info.GetPurchaseInfo().GetObsidianCost();
-        foreach (var modifier in info.GetModifiers())
-            modifier.Apply(modifierInfo);
+        if (!purchasedUpgrades.Contains(info))
+        {
+            purchasedUpgrades.Add(info);
+            money -= info.GetPurchaseInfo().GetMoneyCost();
+            obsidian -= info.GetPurchaseInfo().GetObsidianCost();
+            foreach (var modifier in info.GetModifiers())
+                modifier.Apply(modifierInfo);
+        }
     }
 
     void OnBuildingPurchased(BuildingInfo info)
     {
+        int numPurchased = 0;
+        purchasedBuildings.TryGetValue(info, out numPurchased);
+        purchasedBuildings.Add(info, numPurchased + 1);
+
         money -= info.GetPurchaseInfo().GetMoneyCost();
         obsidian -= info.GetPurchaseInfo().GetObsidianCost();
         foreach (var modifier in info.GetModifiers())
