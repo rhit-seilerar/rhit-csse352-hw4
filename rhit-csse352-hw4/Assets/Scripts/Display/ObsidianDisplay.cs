@@ -8,7 +8,12 @@ public class ObsidianDisplay : GameUpdatable
     {
         base.Start();
         text = GetComponent<TMP_Text>();
+        GameEventBus.Instance.Subscribe<BuildingInfo>(GameEventBus.Type.BuildingPurchased, OnBuildingPurchased);
+        GameEventBus.Instance.Subscribe<UpgradeInfo>(GameEventBus.Type.UpgradePurchased, OnUpgradePurchased);
     }
+
+    void OnBuildingPurchased(BuildingInfo info) => OnUpdate();
+    void OnUpgradePurchased(UpgradeInfo info) => OnUpdate();
 
     protected override void OnStart() { }
 

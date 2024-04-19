@@ -7,6 +7,17 @@ public class BuildingDisplay : PurchasableDisplay<BuildingInfo>, IPointerDownHan
 {
     [SerializeField] TMP_Text count;
 
+    protected override void Start()
+    {
+        base.Start();
+        GameEventBus.Instance.Subscribe<BuildingInfo>(GameEventBus.Type.BuildingPurchased, OnBuildingPurchased);
+        GameEventBus.Instance.Subscribe<UpgradeInfo>(GameEventBus.Type.UpgradePurchased, OnUpgradePurchased);
+        OnUpdate();
+    }
+
+    void OnBuildingPurchased(BuildingInfo info) => OnUpdate();
+    void OnUpgradePurchased(UpgradeInfo info) => OnUpdate();
+
     protected override void OnUpdate()
     {
         var purchaseCount = GameManager.Instance.GetPurchaseCount(info);
