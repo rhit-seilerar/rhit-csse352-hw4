@@ -6,14 +6,18 @@ public class GameEventBus : EventBus<GameEventBus.Type>
 {
     public enum Type
     {
-        Start = 0,
-        Update = 1,
-        Stop = 2,
+        // Lifecycle
+        Start,
+        Update,
+        Stop,
+        End,
 
-        HoverStart = 3, // Hoverable
-        HoverStop = 4, // Hoverable
+        // Hovering
+        HoverStart, // Hoverable
+        HoverStop, // Hoverable
 
-        UpgradePurchased = 5, // State.UpgradeInfo
-        BuildingPurchased = 6, // State.BuildingInfo
+        // Purchasing
+        UpgradePurchased, // State.UpgradeInfo
+        BuildingPurchased, // State.BuildingInfo
     }
 }

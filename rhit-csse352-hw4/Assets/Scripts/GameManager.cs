@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    enum RunningState
+    public enum RunningState
     {
         NOT_STARTED,
         STARTING,
         UPDATING,
         STOPPED,
+        ENDED,
     }
 
     RunningState state = RunningState.NOT_STARTED;
@@ -24,6 +25,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         GameEventBus.Instance.Subscribe(GameEventBus.Type.Start, OnStart);
         GameEventBus.Instance.Subscribe(GameEventBus.Type.Stop, OnStop);
+        GameEventBus.Instance.Subscribe(GameEventBus.Type.End, OnEnd);
         GameEventBus.Instance.Subscribe<UpgradeInfo>(GameEventBus.Type.UpgradePurchased, OnUpgradePurchased);
         GameEventBus.Instance.Subscribe<BuildingInfo>(GameEventBus.Type.BuildingPurchased, OnBuildingPurchased);
     }
@@ -60,6 +62,12 @@ public class GameManager : MonoSingleton<GameManager>
         loops++;
     }
 
+    void OnEnd()
+    {
+        state = RunningState.ENDED;
+        GameEventBus.Instance.Publish(GameEventBus.Type.Stop);
+    }
+
     void OnUpgradePurchased(UpgradeInfo info)
     {
         if (!purchasedUpgrades.Contains(info))
@@ -86,6 +94,7 @@ public class GameManager : MonoSingleton<GameManager>
         return (int) (money / 1);
     }
 
+    public RunningState GetRunningState() => state;
     public int GetLoops() => loops;
     public float GetMoney() => money;
     public int GetObsidian() => (int) Mathf.Floor(obsidian);

@@ -7,7 +7,9 @@ public class UpgradeManager : GameUpdatable
 {
     private static readonly List<UpgradeInfo> upgradeInfos = new List<UpgradeInfo>
     {
-        new UpgradeInfo("Upgrade 0", "This is an upgrade!", new PurchaseInfo(1, 0), new List<IGameModifier>{ new MoneyModifier(1.05f) }),
+        new UpgradeInfo("The Glass Floor",
+            "Seal the volcano with a layer of obsidian.\n<color=red><b>Warning: This will end the game.</b></color>",
+            new PurchaseInfo(0, 0), new List<IGameModifier>{ new GameEndModifier() }),
     };
 
     [SerializeField] GameObject upgradePrefab;

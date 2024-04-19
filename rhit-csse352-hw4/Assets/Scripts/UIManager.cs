@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class UIManager : GameUpdatable
 {
-    [SerializeField] LoopEndDisplay loopEndDisplay;
     [SerializeField] TooltipDisplay tooltipDisplay;
+    [SerializeField] LoopEndDisplay loopEndDisplay;
+    [SerializeField] GameEndDisplay gameEndDisplay;
 
     protected override void Start()
     {
         base.Start();
+        GameEventBus.Instance.Subscribe(GameEventBus.Type.End, OnEnd);
         GameEventBus.Instance.Subscribe<Hoverable>(GameEventBus.Type.HoverStart, OnHoverStart);
+        GameEventBus.Instance.Subscribe<Hoverable>(GameEventBus.Type.HoverStop, OnHoverStop);
         GameEventBus.Instance.Subscribe<Hoverable>(GameEventBus.Type.HoverStop, OnHoverStop);
     }
 
@@ -21,7 +24,13 @@ public class UIManager : GameUpdatable
 
     protected override void OnStop()
     {
-        loopEndDisplay.gameObject.SetActive(true);
+        if (GameManager.Instance.GetRunningState() == GameManager.RunningState.STOPPED)
+            loopEndDisplay.gameObject.SetActive(true);
+    }
+
+    void OnEnd()
+    {
+            gameEndDisplay.gameObject.SetActive(true);
     }
 
     void OnHoverStart(Hoverable hoverable)
