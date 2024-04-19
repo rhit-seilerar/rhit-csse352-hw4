@@ -15,6 +15,7 @@ public class GameManager : MonoSingleton<GameManager>
         NOT_STARTED,
         STARTING,
         UPDATING,
+        PAUSED,
         STOPPED,
         ENDED,
     }
@@ -26,10 +27,12 @@ public class GameManager : MonoSingleton<GameManager>
     int loops = 0;
     float money = 0;
     float obsidian = 0f;
+    int obsidianEarned = 0;
 
     void Start()
     {
         GameEventBus.Instance.Subscribe(GameEventBus.Type.Start, OnStart);
+        GameEventBus.Instance.Subscribe<bool>(GameEventBus.Type.Pause, OnPause);
         GameEventBus.Instance.Subscribe(GameEventBus.Type.Stop, OnStop);
         GameEventBus.Instance.Subscribe(GameEventBus.Type.End, OnEnd);
         GameEventBus.Instance.Subscribe<UpgradeInfo>(GameEventBus.Type.UpgradePurchased, OnUpgradePurchased);
@@ -56,16 +59,24 @@ public class GameManager : MonoSingleton<GameManager>
     {
         obsidian += GetObsidianEarned();
         money = 0;
+        obsidianEarned = 0;
         purchasedUpgrades.Clear();
         purchasedBuildings.Clear();
         modifierInfo = new ModifierInfo();
         state = RunningState.UPDATING;
     }
 
+    void OnPause(bool paused)
+    {
+        state = paused ? RunningState.PAUSED : RunningState.UPDATING;
+    }
+
     void OnStop()
     {
         if (state != RunningState.ENDED)
             state = RunningState.STOPPED;
+        foreach (var bpair in purchasedBuildings)
+            obsidianEarned += (int) Mathf.Floor(bpair.Value * bpair.Key.obsidian);
         loops++;
     }
 
@@ -99,7 +110,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public int GetObsidianEarned()
     {
-        return (int) (money / 1);
+        return obsidianEarned;
     }
 
     public RunningState GetRunningState() => state;
