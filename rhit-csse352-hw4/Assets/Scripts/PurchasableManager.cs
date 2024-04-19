@@ -20,7 +20,7 @@ public abstract class PurchasableManager<D, T> : GameUpdatable where T : Modifie
             purchasables.Add(purchasable);
             purchasable.name = GetName(i);
             purchasable.transform.SetParent(transform);
-            purchasable.GetComponent<D>().Init(info, purchasable.name);
+            purchasable.GetComponent<D>().Init(info, $"Textures/{purchasable.name}");
             i++;
         }
     }
