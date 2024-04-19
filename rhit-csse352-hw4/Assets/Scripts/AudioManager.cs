@@ -6,6 +6,7 @@ public class AudioManager : MonoSingleton<AudioManager>
 {
     [SerializeField] AudioClip clickSound;
     [SerializeField] AudioClip volcanoEruption;
+    [SerializeField] AudioClip victorySound;
     AudioSource audioSource;
 
     void Start()
@@ -14,6 +15,7 @@ public class AudioManager : MonoSingleton<AudioManager>
         GameEventBus.Instance.Subscribe<UpgradeInfo>(GameEventBus.Type.UpgradePurchased, PlayClickSound);
         GameEventBus.Instance.Subscribe<BuildingInfo>(GameEventBus.Type.BuildingPurchased, PlayClickSound);
         GameEventBus.Instance.Subscribe(GameEventBus.Type.Stop, PlayVolcanoEruption);
+        GameEventBus.Instance.Subscribe(GameEventBus.Type.End, PlayVictorySound);
     }
 
     void PlayClickSound(UpgradeInfo info)
@@ -30,5 +32,10 @@ public class AudioManager : MonoSingleton<AudioManager>
     {
         if (GameManager.Instance.GetRunningState() != GameManager.RunningState.ENDED)
             audioSource.PlayOneShot(volcanoEruption);
+    }
+
+    void PlayVictorySound()
+    {
+        audioSource.PlayOneShot(victorySound);
     }
 }
