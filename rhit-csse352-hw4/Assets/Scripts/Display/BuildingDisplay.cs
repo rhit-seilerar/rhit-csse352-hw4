@@ -1,8 +1,9 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class BuildingDisplay : PurchasableDisplay<BuildingInfo>
+public class BuildingDisplay : PurchasableDisplay<BuildingInfo>, IPointerDownHandler
 {
     [SerializeField] TMP_Text count;
 
@@ -16,5 +17,23 @@ public class BuildingDisplay : PurchasableDisplay<BuildingInfo>
             && GameManager.Instance.GetObsidian() >= info.GetPurchaseInfo().GetObsidianCost(purchaseCount);
     }
 
-    public void OnClick() => GameEventBus.Instance.Publish(GameEventBus.Type.BuildingPurchased, info);
+    public void OnClick() => Purchase(1);
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Right)
+            Purchase(10);
+    }
+
+    void Purchase(int count)
+    {
+        var purchaseCount = GameManager.Instance.GetPurchaseCount(info);
+        for (int i = 0; i < count; i++)
+        {
+            if (purchaseCount + i < 9999
+                && GameManager.Instance.GetMoney() >= info.GetPurchaseInfo().GetMoneyCost(purchaseCount + i)
+                && GameManager.Instance.GetObsidian() >= info.GetPurchaseInfo().GetObsidianCost(purchaseCount + i))
+                GameEventBus.Instance.Publish(GameEventBus.Type.BuildingPurchased, info);
+        }
+    }
 }
