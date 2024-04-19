@@ -56,12 +56,16 @@ public class GameManager : MonoSingleton<GameManager>
 
     void OnUpgradePurchased(UpgradeInfo info)
     {
+        money -= info.GetPurchaseInfo().GetMoneyCost();
+        obsidian -= info.GetPurchaseInfo().GetObsidianCost();
         foreach (var modifier in info.GetModifiers())
             modifier.Apply(modifierInfo);
     }
 
     void OnBuildingPurchased(BuildingInfo info)
     {
+        money -= info.GetPurchaseInfo().GetMoneyCost();
+        obsidian -= info.GetPurchaseInfo().GetObsidianCost();
         foreach (var modifier in info.GetModifiers())
             modifier.Apply(modifierInfo);
     }
