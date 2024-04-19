@@ -8,6 +8,7 @@ public class GameManager : MonoSingleton<GameManager>
     public static readonly string MONEY_COLOR = "#28FFD3";
     public static readonly string OBSIDIAN_COLOR = "#372648";
     public static readonly string LAVA_COLOR = "#FF7E00";
+    public static readonly string LOOP_COLOR = "#F1D91F";
     public static readonly string DANGER_COLOR = "red";
 
     public enum RunningState
@@ -50,8 +51,10 @@ public class GameManager : MonoSingleton<GameManager>
         if (state == RunningState.UPDATING)
         {
             GameEventBus.Instance.Publish(GameEventBus.Type.Update);
-            obsidian += Time.deltaTime * modifierInfo.obsidianRate * modifierInfo.obsidianMultiplier * modifierInfo.extractionMultiplier;
-            money += Time.deltaTime * modifierInfo.passiveIncome * modifierInfo.productionMultiplier;
+            money += modifierInfo.bonusMoney + Time.deltaTime * modifierInfo.passiveIncome * modifierInfo.productionMultiplier;
+            obsidian += modifierInfo.bonusObsidian + Time.deltaTime * modifierInfo.obsidianRate * modifierInfo.obsidianMultiplier * modifierInfo.extractionMultiplier;
+            modifierInfo.bonusMoney = 0;
+            modifierInfo.bonusObsidian = 0;
         }
     }
 

@@ -14,6 +14,6 @@ public class DrillingModifier : IGameModifier
 
     public override string ToString()
     {
-        return $"<color={GameManager.HAPPY_COLOR}>+{multiplier * 100:n1}% Extractor Effectiveness</color>";
+        return $"<color={GameManager.OBSIDIAN_COLOR}>+{multiplier * 100:n1}% Extractor Effectiveness</color>";
     }
 }

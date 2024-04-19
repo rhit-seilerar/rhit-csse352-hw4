@@ -14,6 +14,6 @@ public class MiningModifier : IGameModifier
 
     public override string ToString()
     {
-        return $"<color={GameManager.HAPPY_COLOR}>+{multiplier * 100:n1}% Obsidian Yield</color>";
+        return $"<color={GameManager.OBSIDIAN_COLOR}>+{multiplier * 100:n1}% Obsidian Yield</color>";
     }
 }

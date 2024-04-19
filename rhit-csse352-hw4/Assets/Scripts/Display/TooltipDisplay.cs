@@ -15,7 +15,7 @@ public class TooltipDisplay : MonoBehaviour
     {
         hovered = hoverable;
         var info = hoverable.GetHoverInfo();
-        text.text = $"<size=32>{info.GetTitle()}</size>\n<size=20>{info.GetText()}</size>";
+        text.text = $"<size=32>{info.GetTitle()}</size>\n{info.GetText()}";
         gameObject.SetActive(true);
     }
 

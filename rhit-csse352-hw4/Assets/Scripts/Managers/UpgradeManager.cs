@@ -37,9 +37,14 @@ public class UpgradeManager : PurchasableManager<UpgradeDisplay, UpgradeInfo>
         new UpgradeInfo("The Glass Floor",
             $"Seal the volcano with a layer of obsidian.\n<color={GameManager.DANGER_COLOR}><b>Warning: This will end the game.</b></color>",
             new PurchaseInfo(10000, 1000), new List<IGameModifier>{ new GameEndModifier() }),
-        new UpgradeInfo("The Glass Floor [DEBUG]",
-            $"Seal the volcano with a layer of obsidian.\n<color={GameManager.DANGER_COLOR}><b>Warning: This will end the game.</b></color>",
-            new PurchaseInfo(0, 0), new List<IGameModifier>{ new GameEndModifier() }),
+
+        // Debug
+        new UpgradeInfo("Speculative Investors",
+            $"Sudden investing leaves you with more money than you can handle!\n<color={GameManager.DANGER_COLOR}><b>Warning: This is cheating.</b></color>",
+            new PurchaseInfo(0, 0), new List<IGameModifier>{
+                new InstantMoneyModifier(),
+                new InstantObsidianModifier()
+            }),
     };
 
     protected override ICollection<UpgradeInfo> GetInfos() => infos;

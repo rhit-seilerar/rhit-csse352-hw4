@@ -14,6 +14,6 @@ public class MoneyModifier : IGameModifier
 
     public override string ToString()
     {
-        return $"<color={GameManager.HAPPY_COLOR}>+{multiplier * 100:n1}% Money Production</color>";
+        return $"<color={GameManager.MONEY_COLOR}>+{multiplier * 100:n1}% Money Production</color>";
     }
 }
