@@ -22,7 +22,7 @@ public class UIManager : GameUpdatable
 
     protected override void OnStop()
     {
-        if (GameManager.Instance.GetRunningState() == GameManager.RunningState.STOPPED)
+        if (GameManager.Instance.GetRunningState() != GameManager.RunningState.ENDED)
             loopEndDisplay.gameObject.SetActive(true);
     }
 
