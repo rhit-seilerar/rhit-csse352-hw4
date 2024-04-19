@@ -65,7 +65,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     void OnStop()
     {
-        state = RunningState.STOPPED;
+        if (state != RunningState.ENDED)
+            state = RunningState.STOPPED;
         loops++;
     }
 

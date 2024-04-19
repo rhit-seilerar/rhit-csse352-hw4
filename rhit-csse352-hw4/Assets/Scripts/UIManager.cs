@@ -30,7 +30,7 @@ public class UIManager : GameUpdatable
 
     void OnEnd()
     {
-            gameEndDisplay.gameObject.SetActive(true);
+        gameEndDisplay.gameObject.SetActive(true);
     }
 
     void OnHoverStart(Hoverable hoverable)

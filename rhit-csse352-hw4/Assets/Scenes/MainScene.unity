@@ -1336,6 +1336,7 @@ GameObject:
   - component: {fileID: 653817612}
   - component: {fileID: 653817615}
   - component: {fileID: 653817614}
+  - component: {fileID: 653817613}
   m_Layer: 5
   m_Name: Game End Screen
   m_TagString: Untagged
@@ -1363,6 +1364,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &653817613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653817611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4066129bd5b091408d5edc5fed0d69e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  content: {fileID: 0}
 --- !u!114 &653817614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4346,7 +4360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltipDisplay: {fileID: 1592593305}
   loopEndDisplay: {fileID: 1149734168}
-  gameEndDisplay: {fileID: 0}
+  gameEndDisplay: {fileID: 653817613}
 --- !u!114 &1999118389
 MonoBehaviour:
   m_ObjectHideFlags: 0

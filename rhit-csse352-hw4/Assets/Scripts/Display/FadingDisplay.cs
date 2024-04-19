@@ -7,7 +7,13 @@ public abstract class FadingDisplay : MonoBehaviour
 {
     [SerializeField] protected CanvasGroup content;
     Image image;
+    float fadeSpeed;
     bool fading;
+
+    public FadingDisplay(float fadeSpeed) : base()
+    {
+        this.fadeSpeed = fadeSpeed;
+    }
 
     void OnEnable()
     {
@@ -17,7 +23,7 @@ public abstract class FadingDisplay : MonoBehaviour
         content.alpha = 0;
         content.interactable = false;
         fading = false;
-        image.CrossFadeAlpha(1f, 1f, false);
+        image.CrossFadeAlpha(1f, fadeSpeed, false);
         StartCoroutine("FadeContent");
     }
 
@@ -32,7 +38,7 @@ public abstract class FadingDisplay : MonoBehaviour
         while (fading && content.alpha < 1)
         {
             OnFade();
-            content.alpha += Time.deltaTime * 1f;
+            content.alpha += Time.deltaTime * fadeSpeed;
             content.interactable = content.alpha >= 0.1;
             yield return new WaitForEndOfFrame();
         }
