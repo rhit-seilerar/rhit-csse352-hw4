@@ -3,10 +3,8 @@ using UnityEngine;
 
 public class TimerDisplay : GameUpdatable
 {
-    [SerializeField] float startTime = 60.0f;
     TMP_Text text;
     float h, s, v;
-    float time;
 
     protected override void Start()
     {
@@ -17,19 +15,13 @@ public class TimerDisplay : GameUpdatable
 
     protected override void OnStart()
     {
-        time = startTime;
-        text.text = $"Time: {time:n1}s";
+        text.text = $"Time: {GameManager.Instance.GetTimer():n1}s";
     }
 
     protected override void OnUpdate()
     {
-        time -= Time.deltaTime;
-        if (time < 0)
-            time = 0;
-        text.text = $"Time: {time:F1}s";
-        text.color = Color.HSVToRGB(h * time / startTime, s, v, false);
-        if (time <= 0)
-            GameEventBus.Instance.Publish(GameEventBus.Type.Stop);
+        text.text = $"Time: {GameManager.Instance.GetTimer():n1}s";
+        text.color = Color.HSVToRGB(h * GameManager.Instance.GetPercentTimeRemaining(), s, v, false);
     }
 
     protected override void OnStop() { }

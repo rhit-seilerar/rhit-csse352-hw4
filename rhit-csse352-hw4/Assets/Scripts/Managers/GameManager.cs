@@ -21,10 +21,12 @@ public class GameManager : MonoSingleton<GameManager>
         ENDED,
     }
 
+    [SerializeField] float timerStart = 60.0f;
     RunningState state = RunningState.NOT_STARTED;
     ICollection<UpgradeInfo> purchasedUpgrades = new HashSet<UpgradeInfo>();
     IDictionary<BuildingInfo, int> purchasedBuildings = new Dictionary<BuildingInfo, int>();
     ModifierInfo modifierInfo = new ModifierInfo();
+    float timer = 0f;
     int loops = 0;
     float money = 0;
     float obsidian = 0f;
@@ -49,16 +51,27 @@ public class GameManager : MonoSingleton<GameManager>
         
         if (state == RunningState.UPDATING)
         {
+            var deltaTime = Time.deltaTime;
+            if (timer < deltaTime)
+            {
+                deltaTime = timer;
+                timer = 0;
+            }
+            else timer -= deltaTime;
+
             GameEventBus.Instance.Publish(GameEventBus.Type.Update);
-            money += modifierInfo.bonusMoney + Time.deltaTime * modifierInfo.passiveIncome * modifierInfo.productionMultiplier;
-            obsidian += modifierInfo.bonusObsidian + Time.deltaTime * modifierInfo.obsidianRate * modifierInfo.obsidianMultiplier * modifierInfo.extractionMultiplier;
+            money += modifierInfo.bonusMoney + deltaTime * modifierInfo.passiveIncome * modifierInfo.productionMultiplier;
+            obsidian += modifierInfo.bonusObsidian + deltaTime * modifierInfo.obsidianRate * modifierInfo.obsidianMultiplier * modifierInfo.extractionMultiplier;
             modifierInfo.bonusMoney = 0;
             modifierInfo.bonusObsidian = 0;
+
+            if (timer <= 0) GameEventBus.Instance.Publish(GameEventBus.Type.Stop);
         }
     }
 
     void OnStart()
     {
+        timer = timerStart;
         obsidian += GetObsidianEarned();
         money = Mathf.Min(money, modifierInfo.retainCapacity);
         foreach (var key in purchasedBuildings.Keys)
@@ -111,6 +124,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     public float GetObsidianEarned() => Mathf.Floor(modifierInfo.obsidianReward + 0.01f);
     public RunningState GetRunningState() => state;
+    public float GetTimer() => timer;
+    public float GetPercentTimeRemaining() => timer / timerStart;
     public int GetLoops() => loops;
     public float GetMoney() => money;
     public float GetObsidian() => Mathf.Floor(obsidian);
