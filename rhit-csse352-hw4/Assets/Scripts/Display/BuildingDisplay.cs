@@ -22,7 +22,7 @@ public class BuildingDisplay : Hoverable
     {
         var purchaseCount = GameManager.Instance.GetPurchaseCount(info);
         count.text = purchaseCount.ToString();
-        GetComponent<Button>().interactable = purchaseCount <= 999
+        GetComponent<Button>().interactable = purchaseCount < 9999
             && GameManager.Instance.GetMoney() >= info.GetPurchaseInfo().GetMoneyCost()
             && GameManager.Instance.GetObsidian() >= info.GetPurchaseInfo().GetObsidianCost();
     }
