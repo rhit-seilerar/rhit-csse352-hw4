@@ -17,7 +17,7 @@ public class MoneyDisplay : GameUpdatable
 
     protected override void OnUpdate()
     {
-        text.text = $"Money: {GameManager.Instance.GetMoney():c1}";
+        text.text = $"<size=36>Money: </size>{GameManager.Instance.GetMoney():c1}";
     }
 
     protected override void OnStop() { }
