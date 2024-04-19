@@ -493,5 +493,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: {fileID: 611502375053011344}
   text: {fileID: 4517017544611947184}
-  count: {fileID: 0}
   image: {fileID: 6321564883967686194}
