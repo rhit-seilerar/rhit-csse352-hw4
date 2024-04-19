@@ -82,9 +82,10 @@ public class GameManager : MonoSingleton<GameManager>
 
     void OnBuildingPurchased(BuildingInfo info)
     {
+        money -= info.GetPurchaseInfo().GetMoneyCost(GetPurchaseCount(info));
+        obsidian -= info.GetPurchaseInfo().GetObsidianCost(GetPurchaseCount(info));
         purchasedBuildings[info] = GetPurchaseCount(info) + 1;
-        money -= info.GetPurchaseInfo().GetMoneyCost();
-        obsidian -= info.GetPurchaseInfo().GetObsidianCost();
+        info.GetPurchaseInfo().UpdateText(GetPurchaseCount(info));
         foreach (var modifier in info.GetModifiers())
             modifier.Apply(modifierInfo);
     }
