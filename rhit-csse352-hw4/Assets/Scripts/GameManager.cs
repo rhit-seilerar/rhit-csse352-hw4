@@ -39,7 +39,7 @@ public class GameManager : MonoSingleton<GameManager>
         if (state == RunningState.UPDATING)
         {
             GameEventBus.Instance.Publish(GameEventBus.Type.Update);
-            money += Time.deltaTime * modifierInfo.productionMultiplier;
+            money += Time.deltaTime * modifierInfo.productionMultiplier * 10000;
         }
     }
 
