@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class BuildingDisplay : Hoverable
 {
     [SerializeField] TMP_Text text;
+    [SerializeField] TMP_Text count;
     [SerializeField] Image image;
     BuildingInfo info;
 
@@ -19,6 +20,7 @@ public class BuildingDisplay : Hoverable
 
     protected override void OnUpdate()
     {
+        count.text = GameManager.Instance.GetPurchaseCount(info).ToString();
         GetComponent<Button>().enabled = GameManager.Instance.GetMoney() >= info.GetPurchaseInfo().GetMoneyCost()
             && GameManager.Instance.GetObsidian() >= info.GetPurchaseInfo().GetObsidianCost();
     }

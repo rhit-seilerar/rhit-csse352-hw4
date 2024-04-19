@@ -70,9 +70,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     void OnBuildingPurchased(BuildingInfo info)
     {
-        int numPurchased = 0;
-        purchasedBuildings.TryGetValue(info, out numPurchased);
-        purchasedBuildings.Add(info, numPurchased + 1);
+        purchasedBuildings.Add(info, GetPurchaseCount(info) + 1);
 
         money -= info.GetPurchaseInfo().GetMoneyCost();
         obsidian -= info.GetPurchaseInfo().GetObsidianCost();
@@ -88,4 +86,11 @@ public class GameManager : MonoSingleton<GameManager>
     public int GetLoops() => loops;
     public float GetMoney() => money;
     public int GetObsidian() => obsidian;
+    public bool IsPurchased(UpgradeInfo info) => purchasedUpgrades.Contains(info);
+    public int GetPurchaseCount(BuildingInfo info)
+    {
+        int numPurchased;
+        purchasedBuildings.TryGetValue(info, out numPurchased);
+        return numPurchased;
+    }
 }
