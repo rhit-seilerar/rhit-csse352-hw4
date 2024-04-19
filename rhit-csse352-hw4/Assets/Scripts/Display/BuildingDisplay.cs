@@ -1,7 +1,11 @@
+using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class BuildingDisplay : PurchasableDisplay<BuildingInfo>
 {
+    [SerializeField] TMP_Text count;
+
     protected override void OnUpdate()
     {
         var purchaseCount = GameManager.Instance.GetPurchaseCount(info);

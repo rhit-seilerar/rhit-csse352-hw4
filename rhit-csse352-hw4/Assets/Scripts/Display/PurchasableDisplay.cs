@@ -6,7 +6,6 @@ public abstract class PurchasableDisplay<T> : Hoverable where T : ModifierPurcha
 {
     [SerializeField] protected TMP_Text title;
     [SerializeField] protected TMP_Text text;
-    [SerializeField] protected TMP_Text count;
     [SerializeField] protected Image image;
     protected T info;
 

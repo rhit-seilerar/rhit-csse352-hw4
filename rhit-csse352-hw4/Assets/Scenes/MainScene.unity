@@ -251,7 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76f2928065521dc4f975825385d57484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradePrefab: {fileID: 7112261596264168392, guid: 7a44fcc1f7b18fd46958b50c28d906da, type: 3}
+  prefab: {fileID: 7112261596264168392, guid: 7a44fcc1f7b18fd46958b50c28d906da, type: 3}
 --- !u!114 &78906755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1376,7 +1376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4066129bd5b091408d5edc5fed0d69e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  content: {fileID: 0}
+  content: {fileID: 1913063480}
 --- !u!114 &653817614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2941,7 +2941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b47002b03f873e458f5ee1cbc556d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingPrefab: {fileID: 7950205828003676246, guid: e45272f4acd84a84cb47bc765fa49f70, type: 3}
+  prefab: {fileID: 7950205828003676246, guid: e45272f4acd84a84cb47bc765fa49f70, type: 3}
 --- !u!222 &1415663066
 CanvasRenderer:
   m_ObjectHideFlags: 0
