@@ -18,7 +18,7 @@ public class GameManager : MonoSingleton<GameManager>
     ModifierInfo modifierInfo = new ModifierInfo();
     int loops = 0;
     float money = 0;
-    int obsidian = 0;
+    float obsidian = 0f;
 
     void Start()
     {
@@ -39,6 +39,7 @@ public class GameManager : MonoSingleton<GameManager>
         if (state == RunningState.UPDATING)
         {
             GameEventBus.Instance.Publish(GameEventBus.Type.Update);
+            obsidian += Time.deltaTime * modifierInfo.obsidianRate;
             money += Time.deltaTime * modifierInfo.passiveIncome * modifierInfo.productionMultiplier;
         }
     }
@@ -85,7 +86,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public int GetLoops() => loops;
     public float GetMoney() => money;
-    public int GetObsidian() => obsidian;
+    public int GetObsidian() => (int) Mathf.Floor(obsidian);
     public bool IsPurchased(UpgradeInfo info) => purchasedUpgrades.Contains(info);
     public int GetPurchaseCount(BuildingInfo info)
     {
