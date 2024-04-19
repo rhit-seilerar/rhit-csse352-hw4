@@ -13,6 +13,7 @@ public class GameManager : MonoSingleton<GameManager>
     }
 
     RunningState state = RunningState.NOT_STARTED;
+    ModifierInfo modifierInfo = new ModifierInfo();
     int loops = 0;
     float money = 0;
     int obsidian = 0;
@@ -21,6 +22,8 @@ public class GameManager : MonoSingleton<GameManager>
     {
         GameEventBus.Instance.Subscribe(GameEventBus.Type.Start, OnStart);
         GameEventBus.Instance.Subscribe(GameEventBus.Type.Stop, OnStop);
+        GameEventBus.Instance.Subscribe<UpgradeInfo>(GameEventBus.Type.UpgradePurchased, OnUpgradePurchased);
+        GameEventBus.Instance.Subscribe<BuildingInfo>(GameEventBus.Type.BuildingPurchased, OnBuildingPurchased);
     }
 
     void Update()
@@ -34,7 +37,7 @@ public class GameManager : MonoSingleton<GameManager>
         if (state == RunningState.UPDATING)
         {
             GameEventBus.Instance.Publish(GameEventBus.Type.Update);
-            money += Time.deltaTime;
+            money += Time.deltaTime * modifierInfo.productionMultiplier;
         }
     }
 
@@ -49,6 +52,18 @@ public class GameManager : MonoSingleton<GameManager>
     {
         state = RunningState.STOPPED;
         loops++;
+    }
+
+    void OnUpgradePurchased(UpgradeInfo info)
+    {
+        foreach (var modifier in info.GetModifiers())
+            modifier.Apply(modifierInfo);
+    }
+
+    void OnBuildingPurchased(BuildingInfo info)
+    {
+        foreach (var modifier in info.GetModifiers())
+            modifier.Apply(modifierInfo);
     }
 
     public int GetObsidianEarned()

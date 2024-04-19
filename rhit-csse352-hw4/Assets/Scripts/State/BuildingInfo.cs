@@ -4,15 +4,16 @@ using System.Text;
 public class BuildingInfo : HoverInfo
 {
     readonly PurchaseInfo purchaseInfo;
-    readonly List<GameModifier> modifiers;
+    readonly ICollection<IGameModifier> modifiers;
 
-    public BuildingInfo(string title, string text, PurchaseInfo purchaseInfo, List<GameModifier> modifiers) : base(title, text)
+    public BuildingInfo(string title, string text, PurchaseInfo purchaseInfo, ICollection<IGameModifier> modifiers) : base(title, text)
     {
         this.purchaseInfo = purchaseInfo;
         this.modifiers = modifiers;
     }
 
     public PurchaseInfo GetPurchaseInfo() => purchaseInfo;
+    public ICollection<IGameModifier> GetModifiers() => modifiers;
 
     public override string GetText()
     {

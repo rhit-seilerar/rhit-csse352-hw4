@@ -13,7 +13,7 @@ public class BuildingDisplay : Hoverable
     public void Init(BuildingInfo info, string textureName)
     {
         this.info = info;
-        text.text = $"{info.GetTitle()}\nCost: {info.GetPurchaseInfo()}";
+        text.text = $"{info.GetTitle()}\n<size=20>Cost: {info.GetPurchaseInfo()}</size>";
         image.sprite = Sprite.Create(Resources.Load<Texture2D>(textureName), image.sprite.rect, image.sprite.pivot, image.sprite.pixelsPerUnit);
     }
 

@@ -7,7 +7,7 @@ public class UpgradeManager : GameUpdatable
 {
     private static readonly List<UpgradeInfo> upgradeInfos = new List<UpgradeInfo>
     {
-        new UpgradeInfo("Upgrade 0", "This is an upgrade!", new PurchaseInfo(1, 1), new List<GameModifier>{ }),
+        new UpgradeInfo("Upgrade 0", "This is an upgrade!", new PurchaseInfo(1, 0), new List<IGameModifier>{ new MoneyModifier(1.05f) }),
     };
 
     [SerializeField] GameObject upgradePrefab;

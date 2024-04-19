@@ -6,11 +6,11 @@ public class BuildingManager : GameUpdatable
 {
     private static readonly List<BuildingInfo> buildingInfos = new List<BuildingInfo>()
     {
-        new BuildingInfo("Collectible Rocks",     "You found some cat-shaped pumice. Or should I say, <i>paw</i>-mice.", new PurchaseInfo(0, 0), new List<GameModifier>{ }),
-        new BuildingInfo("Lava Tours",            "<i>Only 3 casualties per week!</i>",                                  new PurchaseInfo(0, 0), new List<GameModifier>{ }),
-        new BuildingInfo("Basaltic Sculptures",   "The number of poses is innumerable.",                                 new PurchaseInfo(0, 0), new List<GameModifier>{ }),
-        new BuildingInfo("Geothermal Generators", "Gotta keep the lights on somehow.",                                   new PurchaseInfo(0, 0), new List<GameModifier>{ }),
-        new BuildingInfo("Mineral Extractors",    "<i>Shiny!</i>",                                                       new PurchaseInfo(0, 0), new List<GameModifier>{ }),
+        new BuildingInfo("Collectible Rocks",     "You found some cat-shaped pumice. Or should I say, <i>paw</i>-mice.", new PurchaseInfo(0, 0), new List<IGameModifier>{ }),
+        new BuildingInfo("Lava Tours",            "<i>Only 3 casualties per week!</i>",                                  new PurchaseInfo(0, 0), new List<IGameModifier>{ }),
+        new BuildingInfo("Basaltic Sculptures",   "The number of poses is innumerable.",                                 new PurchaseInfo(0, 0), new List<IGameModifier>{ }),
+        new BuildingInfo("Geothermal Generators", "Gotta keep the lights on somehow.",                                   new PurchaseInfo(0, 0), new List<IGameModifier>{ }),
+        new BuildingInfo("Mineral Extractors",    "<i>Shiny!</i>",                                                       new PurchaseInfo(0, 0), new List<IGameModifier>{ }),
     };
 
     [SerializeField] GameObject buildingPrefab;
