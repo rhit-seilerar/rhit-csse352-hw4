@@ -5,6 +5,7 @@ using UnityEngine;
 public class AudioManager : MonoSingleton<AudioManager>
 {
     [SerializeField] AudioClip clickSound;
+    [SerializeField] AudioClip volcanoEruption;
     AudioSource audioSource;
 
     void Start()
@@ -12,6 +13,7 @@ public class AudioManager : MonoSingleton<AudioManager>
         audioSource = GetComponent<AudioSource>();
         GameEventBus.Instance.Subscribe<UpgradeInfo>(GameEventBus.Type.UpgradePurchased, PlayClickSound);
         GameEventBus.Instance.Subscribe<BuildingInfo>(GameEventBus.Type.BuildingPurchased, PlayClickSound);
+        GameEventBus.Instance.Subscribe(GameEventBus.Type.Stop, PlayVolcanoEruption);
     }
 
     void PlayClickSound(UpgradeInfo info)
@@ -22,5 +24,10 @@ public class AudioManager : MonoSingleton<AudioManager>
     void PlayClickSound(BuildingInfo info)
     {
         audioSource.PlayOneShot(clickSound);
+    }
+
+    void PlayVolcanoEruption()
+    {
+        audioSource.PlayOneShot(volcanoEruption);
     }
 }

@@ -1999,6 +1999,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickSound: {fileID: 8300000, guid: 2fa7c1d43a8544338aece33992ed9b7e, type: 3}
+  volcanoEruption: {fileID: 8300000, guid: a45bb1016c50cb2939b77eb689137aba, type: 3}
 --- !u!82 &1096302548
 AudioSource:
   m_ObjectHideFlags: 0
