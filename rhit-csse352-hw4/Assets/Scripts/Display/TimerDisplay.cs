@@ -20,7 +20,7 @@ public class TimerDisplay : GameUpdatable
     protected override void OnStart()
     {
         time = startTime;
-        text.text = $"Time: {time:F1}s";
+        text.text = $"Time: {time:n1}s";
     }
 
     protected override void OnUpdate()

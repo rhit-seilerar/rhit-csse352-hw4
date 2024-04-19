@@ -19,7 +19,7 @@ public class UpgradeInfo : HoverInfo
     {
         var builder = new StringBuilder();
         builder.AppendLine(base.GetText());
-        builder.Append("Cost: ");
+        builder.Append($"<color={GameManager.DEEMPHASIS_COLOR}>Cost: </color>");
         builder.AppendLine(purchaseInfo.ToString());
         foreach (var modifier in modifiers)
             builder.AppendLine(modifier.ToString());

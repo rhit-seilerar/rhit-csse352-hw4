@@ -8,7 +8,7 @@ public class UpgradeManager : GameUpdatable
     private static readonly List<UpgradeInfo> upgradeInfos = new List<UpgradeInfo>
     {
         new UpgradeInfo("The Glass Floor",
-            "Seal the volcano with a layer of obsidian.\n<color=red><b>Warning: This will end the game.</b></color>",
+            $"Seal the volcano with a layer of obsidian.\n<color={GameManager.DANGER_COLOR}><b>Warning: This will end the game.</b></color>",
             new PurchaseInfo(0, 0), new List<IGameModifier>{ new GameEndModifier() }),
     };
 

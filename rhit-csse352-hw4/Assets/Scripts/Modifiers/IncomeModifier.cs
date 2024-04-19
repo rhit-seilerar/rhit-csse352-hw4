@@ -15,4 +15,9 @@ public class IncomeModifier : IGameModifier
     {
         info.passiveIncome += income;
     }
+
+    public override string ToString()
+    {
+        return $"<color={GameManager.MONEY_COLOR}>+${income:n1} per Second</color>";
+    }
 }

@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    public static readonly string DEEMPHASIS_COLOR = "#333333";
+    public static readonly string HAPPY_COLOR = "#00FF22";
+    public static readonly string MONEY_COLOR = "#28FFD3";
+    public static readonly string OBSIDIAN_COLOR = "#372648";
+    public static readonly string LAVA_COLOR = "#FF7E00";
+    public static readonly string DANGER_COLOR = "red";
+
     public enum RunningState
     {
         NOT_STARTED,

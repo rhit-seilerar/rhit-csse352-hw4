@@ -15,4 +15,9 @@ public class MoneyModifier : IGameModifier
     {
         info.productionMultiplier *= multiplier;
     }
+
+    public override string ToString()
+    {
+        return $"+{multiplier * 100:n1}% Money Production";
+    }
 }

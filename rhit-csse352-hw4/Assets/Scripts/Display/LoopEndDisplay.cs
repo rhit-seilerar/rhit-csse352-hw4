@@ -8,6 +8,6 @@ public class LoopEndDisplay : FadingDisplay
     [SerializeField] protected TMP_Text text;
     protected override void OnFade()
     {
-        text.text = $"You earned <color=#372648>{GameManager.Instance.GetObsidianEarned()}pc</color> of <color=#372648>Obsidian</color>.";
+        text.text = $"You earned <color={GameManager.OBSIDIAN_COLOR}>{GameManager.Instance.GetObsidianEarned()}pc</color> of <color={GameManager.OBSIDIAN_COLOR}>Obsidian</color>.";
     }
 }

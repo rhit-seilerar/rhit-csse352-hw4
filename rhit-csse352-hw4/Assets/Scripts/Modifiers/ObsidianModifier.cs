@@ -15,4 +15,9 @@ public class ObsidianModifier : IGameModifier
     {
         info.obsidianRate += obsidian;
     }
+
+    public override string ToString()
+    {
+        return $"<color={GameManager.OBSIDIAN_COLOR}>+{obsidian:n0}pc per Second</color>";
+    }
 }

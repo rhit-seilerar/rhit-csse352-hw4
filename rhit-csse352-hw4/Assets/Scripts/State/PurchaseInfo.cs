@@ -17,19 +17,19 @@ public class PurchaseInfo
         var hasObsidianCost = GetObsidianCost(buyCount) != 0;
         if (!hasMoneyCost && !hasObsidianCost)
         {
-            this.text = "<color=#00FF22><i>Free!</i></color>";
+            this.text = $"<color={GameManager.HAPPY_COLOR}><i>Free!</i></color>";
         }
         else
         {
             var builder = new StringBuilder();
             if (hasMoneyCost)
             {
-                builder.AppendFormat("<color=#28FFD3>${0}</color>", GetMoneyCost(buyCount).ToString("n2"));
+                builder.Append($"<color={GameManager.MONEY_COLOR}>${GetMoneyCost(buyCount):n2}</color>");
                 if (obsidianCost != 0)
                     builder.Append(", ");
             }
             if (obsidianCost != 0)
-                builder.AppendFormat("<color=#372648>{0}pc</color>", GetObsidianCost(buyCount));
+                builder.Append($"<color={GameManager.OBSIDIAN_COLOR}>{GetObsidianCost(buyCount):n0}pc</color>");
             this.text = builder.ToString();
         }
     }

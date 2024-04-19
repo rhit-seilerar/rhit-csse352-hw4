@@ -17,7 +17,7 @@ public class LoopsDisplay : GameUpdatable
 
     protected override void OnUpdate()
     {
-        text.text = $"<size=36>Loops: </size>{GameManager.Instance.GetLoops()}";
+        text.text = $"<size=36>Loops: </size>{GameManager.Instance.GetLoops():n}";
     }
 
     protected override void OnStop() { }

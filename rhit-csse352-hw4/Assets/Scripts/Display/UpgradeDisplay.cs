@@ -13,7 +13,7 @@ public class UpgradeDisplay : Hoverable
     public void Init(UpgradeInfo info, string textureName)
     {
         this.info = info;
-        text.text = $"{info.GetTitle()}\n<size=20>Cost: {info.GetPurchaseInfo()}</size>";
+        text.text = $"{info.GetTitle()}\n<size=20>Cost: </size>{info.GetPurchaseInfo()}";
         image.sprite = Sprite.Create(Resources.Load<Texture2D>(textureName), image.sprite.rect, image.sprite.pivot, image.sprite.pixelsPerUnit);
     }
 

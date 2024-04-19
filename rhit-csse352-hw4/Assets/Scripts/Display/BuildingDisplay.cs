@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class BuildingDisplay : Hoverable
 {
+    [SerializeField] TMP_Text title;
     [SerializeField] TMP_Text text;
     [SerializeField] TMP_Text count;
     [SerializeField] Image image;
@@ -14,6 +15,7 @@ public class BuildingDisplay : Hoverable
     public void Init(BuildingInfo info, string textureName)
     {
         this.info = info;
+        title.text = info.GetTitle();
         image.sprite = Sprite.Create(Resources.Load<Texture2D>(textureName), image.sprite.rect, image.sprite.pivot, image.sprite.pixelsPerUnit);
     }
 
@@ -21,7 +23,7 @@ public class BuildingDisplay : Hoverable
     {
         var purchaseCount = GameManager.Instance.GetPurchaseCount(info);
         count.text = purchaseCount.ToString();
-        text.text = $"{info.GetTitle()}\n<size=20>Cost: {info.GetPurchaseInfo()}</size>";
+        text.text = info.GetPurchaseInfo().ToString();
         GetComponent<Button>().interactable = purchaseCount < 9999
             && GameManager.Instance.GetMoney() >= info.GetPurchaseInfo().GetMoneyCost(purchaseCount)
             && GameManager.Instance.GetObsidian() >= info.GetPurchaseInfo().GetObsidianCost(purchaseCount);
