@@ -47,6 +47,9 @@ public class GameManager : MonoSingleton<GameManager>
     {
         obsidian += GetObsidianEarned();
         money = 0;
+        purchasedUpgrades.Clear();
+        purchasedBuildings.Clear();
+        modifierInfo = new ModifierInfo();
         state = RunningState.UPDATING;
     }
 
@@ -70,8 +73,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     void OnBuildingPurchased(BuildingInfo info)
     {
-        purchasedBuildings.Add(info, GetPurchaseCount(info) + 1);
-
+        purchasedBuildings[info] = GetPurchaseCount(info) + 1;
         money -= info.GetPurchaseInfo().GetMoneyCost();
         obsidian -= info.GetPurchaseInfo().GetObsidianCost();
         foreach (var modifier in info.GetModifiers())
@@ -89,8 +91,8 @@ public class GameManager : MonoSingleton<GameManager>
     public bool IsPurchased(UpgradeInfo info) => purchasedUpgrades.Contains(info);
     public int GetPurchaseCount(BuildingInfo info)
     {
-        int numPurchased;
-        purchasedBuildings.TryGetValue(info, out numPurchased);
-        return numPurchased;
+        if (!purchasedBuildings.ContainsKey(info))
+            purchasedBuildings[info] = 0;
+        return purchasedBuildings[info];
     }
 }

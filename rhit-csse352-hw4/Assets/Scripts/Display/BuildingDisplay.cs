@@ -20,8 +20,10 @@ public class BuildingDisplay : Hoverable
 
     protected override void OnUpdate()
     {
-        count.text = GameManager.Instance.GetPurchaseCount(info).ToString();
-        GetComponent<Button>().enabled = GameManager.Instance.GetMoney() >= info.GetPurchaseInfo().GetMoneyCost()
+        var purchaseCount = GameManager.Instance.GetPurchaseCount(info);
+        count.text = purchaseCount.ToString();
+        GetComponent<Button>().interactable = purchaseCount <= 999
+            && GameManager.Instance.GetMoney() >= info.GetPurchaseInfo().GetMoneyCost()
             && GameManager.Instance.GetObsidian() >= info.GetPurchaseInfo().GetObsidianCost();
     }
 
