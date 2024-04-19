@@ -5,6 +5,7 @@ public class GameEventBus : EventBus<GameEventBus.Type>
         // Lifecycle
         Start,
         Update,
+        Pause, // bool
         Stop,
         End,
 
